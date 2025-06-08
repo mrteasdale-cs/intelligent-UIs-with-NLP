@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>const textarea = document.getElementById('textarea');
+
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto'; // Reset the height
+                this.style.height = this.scrollHeight + 'px'; // Set height to fit content
+            });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('text_analysis') }}">Text Analysis (NLP)</a></li>
+                <li><a href="{{ url_for('visualisations') }}">Visualisations</a></li>
+            </ul>
+        </nav>
+        <h1>Visualising Text using NLP</h1>
+        <h2>Wordcloud</h2>
+        <p>This tool detects words in a piece of text and creates a wordcloud.</p>
+
+           <form method="POST">
+               <textarea name="text" placeholder="Enter your text here...">"The film suffers from poor writing, with an underdeveloped plot and dragged-out, unnecessary dialogue that makes it feel unbearably long and boring; even the decent cinematography and occasional good performance can't save it from being a forgettable experience."
+               </textarea>
+               <input type="hidden" name="form_type" value="wordcloud">
+               <button class="button-primary" type="submit">Create</button>
+           </form>
+
+            {% if text %}
+                <div class="result">
+                    <img src="{{ url_for('wordcloud_image') }}?text={{ text | urlencode }}" alt="Word Cloud" style="max-width:100%;">
+                </div>
+            {% endif %}
+        <hr>
+        <h2>More to come...</h2>
+
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

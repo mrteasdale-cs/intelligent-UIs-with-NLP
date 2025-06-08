@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import nltk
 import utils
 
@@ -11,7 +11,6 @@ nltk.download('wordnet')
 @app.route('/')
 def home():
     return render_template("index.html")
-
 
 @app.route('/text-analysis', methods=['GET', 'POST'])
 def text_analysis():
@@ -37,6 +36,25 @@ def text_analysis():
                                summary=summary)
 
     return render_template('text-analysis.html')
+
+@app.route('/visualisations', methods=['GET', 'POST'])
+def visualisations():
+    text = None
+    if request.method == 'POST':
+        get_form_type = request.form.get('form_type')
+        if get_form_type == 'wordcloud':
+            text = request.form['text']
+    return render_template('visualisations.html', text=text)
+
+@app.route('/wordcloud_image')
+def wordcloud_image():
+    text = request.args.get('text', '')
+    if not text:
+        # Optionally, return a placeholder image or error
+        return 'Error Generating', 404
+    img = utils.generate_wordcloud(text)
+    return send_file(img, mimetype='image/png')
+
 
 if __name__ == "__main__":
     app.run(debug=True)

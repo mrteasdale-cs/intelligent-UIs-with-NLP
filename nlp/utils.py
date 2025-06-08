@@ -5,12 +5,17 @@ import nltk
 import re
 from nltk.corpus import stopwords
 from sklearn.metrics.pairwise import cosine_similarity
+from srsly.ruamel_yaml import BytesIO
+
 nltk.download('stopwords')
 import textblob
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from textblob import TextBlob
+import numpy as np
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud, STOPWORDS
 
 # Sentiment Analysis Functions
 
@@ -105,3 +110,22 @@ def summarise_text(text, max_sentences=8):
         summarised_text += " " + ranked_sentence[1]
 
     return summarised_text
+
+def generate_wordcloud(text):
+    stopwords = set(STOPWORDS)
+    wordcloud = WordCloud(
+        background_color='white',
+        stopwords=stopwords,
+        max_words=200,
+        max_font_size=40,
+        random_state=42
+    ).generate(text)
+    img = BytesIO()
+    plt.figure(figsize=(10, 8))
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis('off')
+    #plt.show() NOT NEEDED
+    plt.savefig(img, format='png', bbox_inches='tight', pad_inches=0)
+    plt.close()
+    img.seek(0)
+    return img
