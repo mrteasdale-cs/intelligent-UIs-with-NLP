@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NLP Stuff</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('text_analysis') }}">Text Analysis (NLP)</a></li>
+            </ul>
+        </nav>
+        <h1>AI Techniques</h1>
+
+        <p>This area of the site is to practice various AI techniques. Use the links above to navigate</p>
+
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

@@ -1,0 +1,105 @@
+/* ==========================================================================
+   Main Stylesheet for AI Techniques Website
+   Author: M Teasdale
+   Date: 8/6/25
+   Description: Primary CSS for layout, typography, and components for NLP
+   section of projects.mrteasdale.com
+   ========================================================================== */
+/* ------------------ Reset and Base Styles ------------------ */
+/* Reset default browser styles and set base typography */
+
+body {
+   font-size: 1.2em; background-color: #444444; font-family: Arial, sans-serif; padding: 20px;
+}
+/* ------------------ Layout ------------------ */
+/* Styles for page layout, containers, and grid */
+.container {
+        min-height: 500px;
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        border: 5px dashed blue;
+}
+/* ------------------ Header Styles ------------------ */
+/* Styles for the site header and navigation */
+header {
+    /* ... */
+}
+.nav {
+    background: #fff;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav li {
+    display: inline-block;
+    border: 2px solid black;
+    background: #4285f4;
+    margin-right: 20px;
+    padding: 5px;
+}
+
+.nav a,
+.nav a:visited,
+.nav a:active {
+    color: #fff;                /* White text for all states */
+    text-decoration: none;      /* No underline */
+    display: block;             /* Make the whole area clickable */
+    padding: 10px 20px;
+}
+
+.nav a:hover,
+.nav a:focus {
+    background: #205dcd;
+    color: #fff;
+    text-decoration: none;
+        border-radius: 10px;
+}
+/* ------------------ Main Content Styles ------------------ */
+/* Styles for main content area */
+.content{display: flow; margin-bottom: 10px;}
+main {
+    /* ... */
+}
+/* ------------------ Sidebar Styles ------------------ */
+/* Styles for sidebar widgets and links */
+.sidebar {
+    /* ... */
+}
+/* ------------------ Footer Styles ------------------ */
+/* Styles for site footer */
+.footer-container {
+        background: #4285f4;
+        height: 60px;
+        max-width: 90%;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-top: 10px;
+}
+
+footer {
+        text-align: center; color: #fff;
+        padding: 15px;
+}
+/* ------------------ Component: Buttons ------------------ */
+/* Custom button styles for primary and secondary actions */
+.button-primary {
+    background: #4285f4; color: white; border: none; padding: 10px 20px; cursor: pointer; display: flow; border-radius: 6px;
+}
+/* ------------------ Utilities ------------------ */
+/* Helper classes for spacing, alignment, etc. */
+
+.mt-1 { margin-top: 1rem; }
+
+textarea { font-size: 1em; width: 95%; min-height: 200px; margin: 10px 0; }
+#range {display: flow; margin-bottom: 10px;}
+.result { font-size: 0.8em !important; margin-top: 20px; padding: 15px; background: #f0f0f0; color: #000000; border-radius: 15px; border: black 1px; border-style: solid;}
+/* ==========================================================================
+   End of Stylesheet
+   ========================================================================== */

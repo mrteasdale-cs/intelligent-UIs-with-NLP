@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>const textarea = document.getElementById('textarea');
+
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto'; // Reset the height
+                this.style.height = this.scrollHeight + 'px'; // Set height to fit content
+            });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('text_analysis') }}">Text Analysis (NLP)</a></li>
+            </ul>
+        </nav>
+        <h1>Text Analysis using Natural Language Processing (NLP)</h1>
+        <h2>Sentiment</h2>
+        <p>This tool detects the sentiment of a piece of text, for example a movie review. Click Analyse to detect sentiment, or type your own text.</p>
+
+           <form method="POST">
+               <textarea name="text" placeholder="Enter your text here...">"The film suffers from poor writing, with an underdeveloped plot and dragged-out, unnecessary dialogue that makes it feel unbearably long and boring; even the decent cinematography and occasional good performance can't save it from being a forgettable experience."
+               </textarea>
+               <input type="hidden" name="form_type" value="sentiment">
+               <button class="button-primary" type="submit">Analyse</button>
+           </form>
+
+            {% if sentiment %}
+                <div class="result">
+                    <!--<h3>Cleaned Text:</h3>
+                    <p>{{ cleaned_text }}</p>-->
+
+                    <h3>Sentiment Analysis:</h3>
+                    <p>Overall Sentiment: {{ sentiment.sentiment }}</p>
+                    <p>Confidence Scores:</p>
+                    <ul>
+                        <li>Polarity: {{ "%.2f"|format(sentiment.polarity) }}</li>
+                        <li>Subjectivity: {{ "%.2f"|format(sentiment.subjectivity) }} ({{"%.2f"|format(sentiment.subjectivity*100)}}%)</li>
+                    </ul>
+                </div>
+            {% endif %}
+        <hr>
+        <h2>Summarise Text</h2>
+        <p><b>Purpose</b>: This tool summarises large blocks of text, for example a news article.</p>
+        <p><b>How it works</b>: It uses TfidfVectorizer() to convert all sentences into numerical vectors based on word importance. It calculates the cosine similarity between every pair of sentence vectors, resulting in a matrix where each value shows how similar two sentences are.</p>
+        <p><b>How to use</b>: Paste a large block of text into the area, then use the slider to generate an output that is shorter or longer.</p>
+        <div class="content">
+           <form method="POST">
+               <textarea id="textarea" name="summary_text" placeholder="Enter your text here...">Title:
+Breakthrough in Renewable Energy: Scientists Develop Ultra-Efficient Solar Panel
+
+Article:
+Scientists at the University of Cambridge have announced a significant breakthrough in renewable energy technology, unveiling a new type of solar panel that boasts record-setting efficiency rates. The research team, led by Dr Emily Carter, revealed their findings at a press conference on Monday, highlighting the potential impact on global energy production.
+
+The newly developed solar panels utilise a unique combination of perovskite and silicon, allowing them to convert sunlight into electricity with an efficiency of 34.5%, surpassing the previous industry standard of 26%. According to Dr Carter, this innovation could dramatically reduce the cost of solar energy and accelerate the transition away from fossil fuels.
+
+The project, which began in 2022, received funding from both the UK government and several private investors. Over the past two years, the team conducted extensive laboratory tests and outdoor trials to ensure the panels’ durability and performance under various weather conditions. The results consistently demonstrated high efficiency and resilience, even in low-light environments.
+
+Industry experts have praised the development as a “game-changer” for the renewable energy sector. “This advancement not only makes solar power more affordable but also more accessible to regions with less sunlight,” said Mark Thompson, CEO of GreenTech Solutions.
+
+The Cambridge team is now collaborating with manufacturers to scale up production, with plans to bring the new panels to market by early 2026. Dr Carter emphasised the importance of continued investment in clean energy research, stating, “Innovations like this are crucial for meeting our climate goals and ensuring a sustainable future.”
+
+The government has expressed strong support for the initiative, with Energy Secretary Olivia Bennett describing the breakthrough as “a proud moment for British science and a vital step towards net zero.” Environmental groups have also welcomed the news, noting the potential for widespread adoption of the technology to significantly reduce carbon emissions worldwide.
+
+As the world faces mounting challenges from climate change, the introduction of ultra-efficient solar panels offers hope for a cleaner, greener future. The Cambridge team’s achievement underscores the role of scientific research and international collaboration in addressing the planet’s most pressing issues.
+
+</textarea>
+               <label id="range">
+                   Shorter <input type="range" name="summary_length" value="summary_length" min="2" max="8"> Longer
+               </label>
+               <input type="hidden" name="form_type" value="summary">
+               <button class="button-primary" type="submit">Summarise</button>
+           </form>
+
+            {% if summary %}
+                <h3>Summary</h3>
+                <div class="result">
+                    <p>{{ summary }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>
