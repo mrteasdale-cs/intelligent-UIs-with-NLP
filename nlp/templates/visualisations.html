@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Text Analysis</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script>const textarea = document.getElementById('textarea');
-
-            textarea.addEventListener('input', function() {
-                this.style.height = 'auto'; // Reset the height
-                this.style.height = this.scrollHeight + 'px'; // Set height to fit content
-            });
-    </script>
-</head>
+{% include 'head.html' %}
 <body>
+    {% include 'header.html' %}
     <div class="container">
-        <nav class="nav">
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('text_analysis') }}">Text Analysis (NLP)</a></li>
-                <li><a href="{{ url_for('visualisations') }}">Visualisations</a></li>
-            </ul>
-        </nav>
         <h1>Visualising Text using NLP</h1>
         <h2>Wordcloud</h2>
         <p>This tool detects words in a piece of text and creates a wordcloud.</p>

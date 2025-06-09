@@ -13,14 +13,8 @@
     </script>
 </head>
 <body>
+    {% include 'header.html' %}
     <div class="container">
-        <nav class="nav">
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('text_analysis') }}">Text Analysis (NLP)</a></li>
-                <li><a href="{{ url_for('visualisations') }}">Visualisations</a></li>
-            </ul>
-        </nav>
         <h1>Text Analysis using Natural Language Processing (NLP)</h1>
         <h2>Sentiment</h2>
         <p>This tool detects the sentiment of a piece of text, for example a movie review. Click Analyse to detect sentiment, or type your own text.</p>

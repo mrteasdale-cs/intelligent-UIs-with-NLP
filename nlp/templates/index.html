@@ -1,22 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>NLP Stuff</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% include 'head.html' %}
 <body>
+    {% include 'header.html' %}
     <div class="container">
-        <nav class="nav">
-            <ul>
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('text_analysis') }}">Text Analysis (NLP)</a></li>
-                <li><a href="{{ url_for('visualisations') }}">Visualisations</a></li>
-            </ul>
-        </nav>
         <h1>AI Techniques</h1>
 
-        <p>This area of the site is to practice various AI techniques. Use the links above to navigate</p>
+        <p>This area of the site is to practice various AI techniques. Right now, I am focusing on text analysis using NLP. Text analysis is the process of extracting meaningful information, patterns, and insights from unstructured text data.
+            Natural Language Processing (NLP) is the field of artificial intelligence that enables computers to understand,
+            interpret, and generate human language, for example Google Assistant and Alexa.</p>
+
+        <p>Use the links above to navigate.</p>
 
     </div>
     {% include 'footer.html' %}

@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, Response
 import nltk
 import utils
+from werkzeug.wsgi import FileWrapper
 
 app = Flask(__name__, template_folder='templates')
 
@@ -11,6 +12,10 @@ nltk.download('wordnet')
 @app.route('/')
 def home():
     return render_template("index.html")
+
+@app.route('/info_page')
+def info_page():
+    return render_template("info-extraction-ner.html")
 
 @app.route('/text-analysis', methods=['GET', 'POST'])
 def text_analysis():
@@ -53,7 +58,9 @@ def wordcloud_image():
         # Optionally, return a placeholder image or error
         return 'Error Generating', 404
     img = utils.generate_wordcloud(text)
-    return send_file(img, mimetype='image/png')
+    img.seek(0)
+
+    return Response(FileWrapper(img), mimetype='image/png')
 
 
 if __name__ == "__main__":

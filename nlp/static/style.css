@@ -9,12 +9,15 @@
 /* Reset default browser styles and set base typography */
 
 body {
-   font-size: 1.2em; background-color: #444444; font-family: Arial, sans-serif; padding: 20px;
+    font-size: 1.2em;
+    background-color: #1e1e1e;
+    padding: 20px;
+    font-family: 'Roboto', 'Segoe UI', 'Arial', sans-serif;
 }
 /* ------------------ Layout ------------------ */
 /* Styles for page layout, containers, and grid */
 .container {
-        min-height: 500px;
+        min-height: 800px;
         max-width: 900px;
         margin: 0 auto;
         background: white;
@@ -24,11 +27,18 @@ body {
 }
 /* ------------------ Header Styles ------------------ */
 /* Styles for the site header and navigation */
-header {
-    /* ... */
+.header-container {
+    background: #1e1e1e;
+        height: 100px;
+        max-width: 100%;
+        border-radius: 5px;
+        margin: 0 auto;
+        margin-top: 10px;
+        text-align: center;
 }
+
 .nav {
-    background: #fff;
+    color: white;
 }
 
 .nav ul {
@@ -77,8 +87,8 @@ main {
 .footer-container {
         background: #4285f4;
         height: 60px;
-        max-width: 90%;
-        border-radius: 10px;
+        max-width: 100%;
+        border-radius: 5px;
         margin: 0 auto;
         margin-top: 10px;
 }
