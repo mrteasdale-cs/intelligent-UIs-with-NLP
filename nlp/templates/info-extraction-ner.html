@@ -1,260 +1,272 @@
 {% include 'head.html' %}
 <body>
-{% include 'header.html' %}
-<div class="container">
-    <h1>Information Extraction, Named-Entity Recognition, and Part-of-Speech Tagging</h1>
+    {% include 'header.html' %}
+    <div class="container">
+        <h1>Information Extraction, Named-Entity Recognition, and Part-of-Speech Tagging</h1>
 
-    <h2>Introduction and Learning Objectives:</h2>
-    <ul>
-      <li>Understand information extraction (IE)</li>
-      <li>Understand named-entity recognition (NER)</li>
-      <li>Understand part-of-speech tagging (POS)</li>
-      <li>Understand sentiment analysis: goals, applications, methods, and evaluation</li>
-      <li>Understand lexicon-based approaches for sentiment analysis</li>
-      <li>Learn how to evaluate sentiment classification</li>
-    </ul>
+        <h2>Introduction and Learning Objectives:</h2>
+        <ul>
+            <li>Understand information extraction (IE)</li>
+            <li>Understand named-entity recognition (NER)</li>
+            <li>Understand part-of-speech tagging (POS)</li>
+            <li>Understand sentiment analysis: goals, applications, methods, and evaluation</li>
+            <li>Understand lexicon-based approaches for sentiment analysis</li>
+            <li>Learn how to evaluate sentiment classification</li>
+        </ul>
 
-    <h2>Defining Information Extraction</h2>
-    <p>
-      Information extraction (IE) systems retrieve, understand, and extract relevant pieces of text, such as phrases and named entities, from documents. They generate structured representations in formats like JSON, XML, or database tables, enabling further analysis and querying.
-    </p>
-    <p>
-      IE systems answer questions like: Who did what to whom? When? Where? They transform unstructured text into structured data for querying and further use.
-    </p>
+        <h2>Defining Information Extraction</h2>
+        <p>
+            Information extraction (IE) systems retrieve, understand, and extract relevant pieces of text, such as phrases and named entities, from documents. They generate structured representations in formats like JSON, XML, or database tables, enabling further analysis and querying.
+        </p>
+        <p>
+            IE systems answer questions like: Who did what to whom? When? Where? They transform unstructured text into structured data for querying and further use.
+        </p>
 
-    <h2>IE System Applications</h2>
-    <ul>
-      <li>Creating calendar events from emails</li>
-      <li>Business intelligence: extracting insights from reports</li>
-      <li>Bioinformatics: learning drug-gene interactions from research</li>
-      <li>Retail: supporting marketing and inventory decisions</li>
-    </ul>
-    <div class="img-placeholder">[Image Placeholder: IE System Applications]</div>
+        <h2>IE System Applications</h2>
+        <ul>
+            <li>Creating calendar events from emails</li>
+            <li>Business intelligence: extracting insights from reports</li>
+            <li>Bioinformatics: learning drug-gene interactions from research</li>
+            <li>Retail: supporting marketing and inventory decisions</li>
+        </ul>
+        <div class="img-placeholder">
 
-    <h2>Named-Entity Recognition (NER)</h2>
-    <p>
-      NER identifies and classifies proper names in text, such as people, locations, organizations, dates, times, and quantities. It is foundational for many language processing applications, including sentiment analysis.
-    </p>
+        </div>
 
-    <h3>NER Example</h3>
-    <p>
-      <em>Excerpt:</em><br>
-      "Funding for poor countries to cope with the impacts of the climate crisis will be a key focus at Cop26. The UN secretary general, António Guterres, warned last year in an interview with the Guardian that the longstanding pledge by rich countries to provide $100bn (£70bn) a year to developing countries from 2020 was unlikely to be met… Along with the US, China, Russia and France, the UK is one of the five permanent members of the security council but has not chaired a session since John Major did so in 1992."
-    </p>
-    <ul>
-      <li><strong>People:</strong> António Guterres, John Major</li>
-      <li><strong>Dates:</strong> 2020, 1992</li>
-      <li><strong>Locations:</strong> US, China, Russia, France, UK</li>
-      <li><strong>Organisations:</strong> Cop26, UN, Guardian</li>
-      <li><strong>Quantities:</strong> $100bn (£70bn)</li>
-    </ul>
+        <h2>Named-Entity Recognition (NER)</h2>
+        <p>
+            NER identifies and classifies proper names in text, such as people, locations, organisations, dates, times, and quantities. It is foundational for many language processing applications, including sentiment analysis.
+        </p>
 
-    <h3>Why Recognise Named Entities?</h3>
-    <ul>
-      <li>Tagging and indexing for search and linking</li>
-      <li>Key for question-answering systems</li>
-      <li>Supports sentiment analysis by linking opinions to entities</li>
-      <li>Enables structured knowledge extraction for databases and knowledge graphs</li>
-    </ul>
+        <h3>NER Example</h3>
+        <p>
+            <em>Excerpt:</em><br>
+            "Funding for poor countries to cope with the impacts of the climate crisis will be a key focus at Cop26.
+            The UN secretary general, António Guterres, warned last year in an interview with the Guardian that the longstanding pledge by rich countries to provide $100bn (£70bn) a year to developing countries from 2020 was unlikely to be met… Along with the US, China, Russia and France, the UK is one of the five permanent members of the security council but has not chaired a session since John Major did so in 1992."
+        </p>
+        <ul>
+            <li><strong>People:</strong> António Guterres, John Major</li>
+            <li><strong>Dates:</strong> 2020, 1992</li>
+            <li><strong>Locations:</strong> US, China, Russia, France, UK</li>
+            <li><strong>Organisations:</strong> Cop26, UN, Guardian</li>
+            <li><strong>Quantities:</strong> $100bn (£70bn)</li>
+        </ul>
 
-    <h3>NER Ambiguities</h3>
-    <ul>
-      <li><strong>Boundary ambiguity:</strong> "First Bank of Chicago" vs. "Bank of Chicago"</li>
-      <li><strong>Type ambiguity:</strong> "Washington" can refer to a person, city, organization, or vehicle</li>
-    </ul>
+        <h3>Why Recognise Named Entities?</h3>
+        <ul>
+            <li>Tagging and indexing for search and linking</li>
+            <li>Key for question-answering systems</li>
+            <li>Supports sentiment analysis by linking opinions to entities</li>
+            <li>Enables structured knowledge extraction for databases and knowledge graphs</li>
+        </ul>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Tag</th>
-          <th>Examples</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>People</td>
-          <td>PER</td>
-          <td>Turing, John Major</td>
-        </tr>
-        <tr>
-          <td>Organisation</td>
-          <td>ORG</td>
-          <td>IPCC, Cop26</td>
-        </tr>
-        <tr>
-          <td>Location</td>
-          <td>LOC</td>
-          <td>Mt. Sanitas, Chicago</td>
-        </tr>
-        <tr>
-          <td>Geo-political entity</td>
-          <td>GPE</td>
-          <td>Palo Alto, UK</td>
-        </tr>
-        <tr>
-          <td>Facility</td>
-          <td>FAC</td>
-          <td>Golden Gate Bridge</td>
-        </tr>
-        <tr>
-          <td>Vehicle</td>
-          <td>VEH</td>
-          <td>Ford Falcon</td>
-        </tr>
-      </tbody>
-    </table>
+        <h3>NER Ambiguities</h3>
+        <ul>
+            <li><strong>Boundary ambiguity:</strong> "First Bank of Chicago" vs. "Bank of Chicago"</li>
+            <li><strong>Type ambiguity:</strong> "Washington" can refer to a person, city, organisation, or vehicle</li>
+        </ul>
 
-    <h3>How Does NER Work?</h3>
-    <ul>
-      <li>NER uses sequence labelling models trained on annotated datasets</li>
-      <li>Common encoding schemes: IO (Inside-Outside), IOB (Inside-Outside-Beginning)</li>
-      <li>Features: current word, context words, part-of-speech tags, previous/next labels</li>
-    </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Tag</th>
+                    <th>Examples</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>People</td>
+                    <td>PER</td>
+                    <td>Turing, John Major</td>
+                </tr>
+                <tr>
+                    <td>Organisation</td>
+                    <td>ORG</td>
+                    <td>IPCC, Cop26</td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>LOC</td>
+                    <td>Mt. Sanitas, Chicago</td>
+                </tr>
+                <tr>
+                    <td>Geo-political entity</td>
+                    <td>GPE</td>
+                    <td>Palo Alto, UK</td>
+                </tr>
+                <tr>
+                    <td>Facility</td>
+                    <td>FAC</td>
+                    <td>Golden Gate Bridge</td>
+                </tr>
+                <tr>
+                    <td>Vehicle</td>
+                    <td>VEH</td>
+                    <td>Ford Falcon</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <h3>NER Training and Testing Process</h3>
-    <ol>
-      <li>Collect representative training texts</li>
-      <li>Label each token for its entity class</li>
-      <li>Design feature extractors</li>
-      <li>Train a sequence classifier</li>
-    </ol>
-    <p><strong>Testing:</strong> Apply the trained model to new texts and output recognized entities.</p>
-    <div class="img-placeholder">[Image Placeholder: NER Workflow]</div>
+        <h3>How Does NER Work?</h3>
+        <ul>
+            <li>NER uses sequence labelling models trained on annotated datasets</li>
+            <li>Common encoding schemes: IO (Inside-Outside), IOB (Inside-Outside-Beginning)</li>
+            <li>Features: current word, context words, part-of-speech tags, previous/next labels</li>
+        </ul>
 
-    <h2>Part-of-Speech (POS) Tagging</h2>
-    <p>
-      POS tagging determines the grammatical function of each token in a text, such as noun, verb, adjective, etc. The same word can have different tags depending on context.
-    </p>
-    <ul>
-      <li><strong>Example:</strong> "back" can be a noun ("on my back"), adverb ("win the voters back"), adjective ("the back door"), or verb ("promised to back the bill").</li>
-    </ul>
+        <h3>NER Training and Testing Process</h3>
+        <ol>
+            <li>Collect representative training texts</li>
+            <li>Label each token for its entity class</li>
+            <li>Design feature extractors</li>
+            <li>Train a sequence classifier</li>
+        </ol>
+        <p><strong>Testing:</strong> Apply the trained model to new texts and output recognised entities.</p>
+        <div class="img-placeholder">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.johnsnowlabs.com%2Fwp-content%2Fuploads%2F2023%2F04%2FAn-Overview-Of-Named-Entity_3.jpg&f=1&nofb=1&ipt=ed1d015c40174b99f5c4d645cf3905cce308666d93e15fd2c2b56e4a36489518" height="300" width = "550">
+        </div>
 
-    <h3>Penn Treebank POS Tags (Selected)</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Tag</th>
-          <th>Description</th>
-          <th>Example</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>NN</td><td>Noun, singular</td><td>llama</td></tr>
-        <tr><td>NNS</td><td>Noun, plural</td><td>llamas</td></tr>
-        <tr><td>VB</td><td>Verb, base form</td><td>eat</td></tr>
-        <tr><td>VBD</td><td>Verb, past tense</td><td>ate</td></tr>
-        <tr><td>JJ</td><td>Adjective</td><td>yellow</td></tr>
-        <tr><td>RB</td><td>Adverb</td><td>quickly</td></tr>
-        <tr><td>IN</td><td>Preposition</td><td>in, of</td></tr>
-        <tr><td>CC</td><td>Coordinating conjunction</td><td>and, but</td></tr>
-      </tbody>
-    </table>
+        <h2>Part-of-Speech (POS) Tagging</h2>
+        <p>
+            POS tagging determines the grammatical function of each token in a text, such as noun, verb, adjective, etc. The same word can have different tags depending on context.
+        </p>
+        <ul>
+            <li>
+                <strong>Example:</strong> "back" can be a noun ("on my back"), adverb ("win the voters back"), adjective ("the back door"), or verb ("promised to back the bill").
+            </li>
+        </ul>
 
-    <h3>POS Tagging as Sequence Labelling</h3>
-    <ul>
-      <li>Taggers use information about neighboring tokens for accurate tagging</li>
-      <li>Important for parsing, speech recognition, and word sense disambiguation</li>
-    </ul>
-    <div class="img-placeholder">[Image Placeholder: POS Tagging Example]</div>
+        <h3>Penn Treebank POS Tags (Selected)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>NN</td><td>Noun, singular</td><td>llama</td></tr>
+                <tr><td>NNS</td><td>Noun, plural</td><td>llamas</td></tr>
+                <tr><td>VB</td><td>Verb, base form</td><td>eat</td></tr>
+                <tr><td>VBD</td><td>Verb, past tense</td><td>ate</td></tr>
+                <tr><td>JJ</td><td>Adjective</td><td>yellow</td></tr>
+                <tr><td>RB</td><td>Adverb</td><td>quickly</td></tr>
+                <tr><td>IN</td><td>Preposition</td><td>in, of</td></tr>
+                <tr><td>CC</td><td>Coordinating conjunction</td><td>and, but</td></tr>
+            </tbody>
+        </table>
 
-    <h2>Sentiment Analysis</h2>
-    <p>
-      Sentiment analysis is a text classification task that extracts opinions and determines the positive or negative orientation of a writer toward a subject, such as a product or political event.
-    </p>
-    <ul>
-      <li>Used in marketing, politics, recommendation systems, trust/reputation systems, and research</li>
-      <li>Can be binary (positive/negative) or multi-level (e.g., very positive, positive, neutral, negative, very negative)</li>
-    </ul>
+        <h3>POS Tagging as Sequence Labelling</h3>
+        <ul>
+            <li>Taggers use information about neighboring tokens for accurate tagging</li>
+            <li>Important for parsing, speech recognition, and word sense disambiguation</li>
+        </ul>
+        <div class="img-placeholder">[Image Placeholder: POS Tagging Example]</div>
 
-    <h3>Sentiment Levels Example</h3>
-    <ul>
-      <li>[-5, -3]: very negative</li>
-      <li>[-3, -1]: negative</li>
-      <li>[-1, 1]: needs improvement</li>
-      <li>[1, 3]: positive</li>
-      <li>[3, 5]: very positive</li>
-    </ul>
+        <h2>Sentiment Analysis</h2>
+        <p>
+            Sentiment analysis is a text classification task that extracts opinions and determines the positive or negative orientation of a writer toward a subject, such as a product or political event.
+        </p>
+        <ul>
+            <li>Used in marketing, politics, recommendation systems, trust/reputation systems, and research</li>
+            <li>Can be binary (positive/negative) or multi-level (e.g., very positive, positive, neutral, negative, very negative)</li>
+        </ul>
 
-    <h3>Applications of Sentiment Analysis</h3>
-    <ul>
-      <li>Marketers and businesses for customer feedback</li>
-      <li>Political analysts for campaign tracking</li>
-      <li>Recommendation engines</li>
-      <li>Trust and reputation systems in e-commerce</li>
-      <li>Researchers in psychology, finance, and social science</li>
-    </ul>
+        <h3>Sentiment Levels Example</h3>
+        <ul>
+            <li>[-5, -3]: very negative</li>
+            <li>[-3, -1]: negative</li>
+            <li>[-1, 1]: needs improvement</li>
+            <li>[1, 3]: positive</li>
+            <li>[3, 5]: very positive</li>
+        </ul>
 
-    <h2>Bag of Words Model</h2>
-    <p>
-      The bag-of-words model represents text by the frequency of words, ignoring their order. It is widely used for document classification and language modelling.
-    </p>
-    <div class="img-placeholder">[Image Placeholder: Bag of Words Visualization]</div>
+        <h3>Applications of Sentiment Analysis</h3>
+        <ul>
+            <li>Marketers and businesses for customer feedback</li>
+            <li>Political analysts for campaign tracking</li>
+            <li>Recommendation engines</li>
+            <li>Trust and reputation systems in e-commerce</li>
+            <li>Researchers in psychology, finance, and social science</li>
+        </ul>
 
-    <h2>Sentiment Analysis Techniques</h2>
-    <ul>
-      <li><strong>Machine Learning Approaches:</strong> Supervised, semi-supervised, unsupervised</li>
-      <li><strong>Lexicon-Based Approaches:</strong> Use sentiment lexicons (dictionaries or corpus-based)</li>
-      <li><strong>Hybrid Approaches:</strong> Combine machine learning and lexicon-based methods</li>
-    </ul>
+        <h2>Bag of Words Model</h2>
+        <p>
+            The bag-of-words model represents text by the frequency of words, ignoring their order.... It is widely used for document classification and language modelling.
+        </p>
+        <div class="img-placeholder">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A893%2F1*axffCQ9ae0FHXxhuy66FbA.png&f=1&nofb=1&ipt=2d121ad6d647967183515038448002cd0c9c2f24f625d034b2fb17d1be3fc28b" height="300" width = "550">
+        </div>
 
-    <h3>Common Sentiment Lexicons</h3>
-    <ul>
-      <li>Harvard General Inquirer</li>
-      <li>LIWC (Linguistic Inquiry and Word Count)</li>
-      <li>MPQA Subjectivity Lexicon</li>
-      <li>SentiWordNet</li>
-      <li>VADER (Valence Aware Dictionary and sEntiment Reasoner)</li>
-    </ul>
+        <h2>Sentiment Analysis Techniques</h2>
+        <ul>
+            <li><strong>Machine Learning Approaches:</strong> Supervised, semi-supervised, unsupervised</li>
+            <li><strong>Lexicon-Based Approaches:</strong> Use sentiment lexicons (dictionaries or corpus-based)</li>
+            <li><strong>Hybrid Approaches:</strong> Combine machine learning and lexicon-based methods</li>
+        </ul>
 
-    <h3>ML-Based Sentiment Classifier Architecture</h3>
-    <ol>
-      <li>Data collection (e.g., tweets via API)</li>
-      <li>Text cleaning and preprocessing</li>
-      <li>Feature extraction (Bag of Words, TF-IDF)</li>
-      <li>Data split: training (80%), testing (20%)</li>
-      <li>Model training (Naïve Bayes, Logistic Regression, Random Forest, SVM)</li>
-      <li>Model evaluation: precision, recall, F1-score</li>
-      <li>Deployment for prediction</li>
-    </ol>
-    <div class="img-placeholder">[Image Placeholder: Sentiment Classifier Architecture]</div>
+        <h3>Common Sentiment Lexicons</h3>
+        <ul>
+            <li>Harvard General Inquirer</li>
+            <li>LIWC (Linguistic Inquiry and Word Count)</li>
+            <li>MPQA Subjectivity Lexicon</li>
+            <li>SentiWordNet</li>
+            <li>VADER (Valence Aware Dictionary and sEntiment Reasoner)</li>
+        </ul>
 
-    <h2>TF-IDF (Term Frequency-Inverse Document Frequency)</h2>
-    <p>
-      TF-IDF evaluates how relevant a word is to a document in a collection. It increases with the word's frequency in the document but decreases with its frequency across all documents, highlighting unique terms.
-    </p>
+        <h3>ML-Based Sentiment Classifier Architecture</h3>
+        <ol>
+            <li>Data collection (e.g., tweets via API)</li>
+            <li>Text cleaning and preprocessing</li>
+            <li>Feature extraction (Bag of Words, TF-IDF)</li>
+            <li>Data split: training (80%), testing (20%)</li>
+            <li>Model training (Naïve Bayes, Logistic Regression, Random Forest, SVM)</li>
+            <li>Model evaluation: precision, recall, F1-score</li>
+            <li>Deployment for prediction</li>
+        </ol>
+        <div class="img-placeholder">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.ISkTrkR2ApoKOoVnGStlbwHaEO%3Fpid%3DApi&f=1&ipt=ef21110da92438acf20e8320710cd4a101d7796632f90bbbfc15bddf321e2330" height="300" width="450">
+        </div>
 
-    <h2>Semi-Supervised Learning in Sentiment Analysis</h2>
-    <ul>
-      <li>Combines labelled and unlabelled data for training</li>
-      <li>Wrapper-based and self-training methods iteratively label and retrain on new data</li>
-      <li>Topic-based SSL (Semi-Supervised Learning) clusters tweets by topic for specialized sentiment models</li>
-    </ul>
+        <h2>TF-IDF (Term Frequency-Inverse Document Frequency)</h2>
+        <p>
+            TF-IDF evaluates how relevant a word is to a document in a collection. It increases with the word's frequency in the document but decreases with its frequency across all documents, highlighting unique terms.
+        </p>
 
-    <h2>Evaluating Text Classifiers</h2>
-    <ul>
-      <li><strong>Accuracy:</strong> Percentage of correct predictions (not reliable with unbalanced classes)</li>
-      <li><strong>Precision:</strong> Proportion of predicted positives that are true positives</li>
-      <li><strong>Recall:</strong> Proportion of actual positives correctly identified</li>
-      <li><strong>F1-score:</strong> Harmonic mean of precision and recall</li>
-    </ul>
-    <p>
-      Precision and recall are preferred over accuracy when dealing with rare or unbalanced classes.
-    </p>
-    <div class="img-placeholder">[Image Placeholder: Precision, Recall, F1-score Diagram]</div>
+        <h2>Semi-Supervised Learning in Sentiment Analysis</h2>
+        <ul>
+            <li>Combines labelled and unlabelled data for training</li>
+            <li>Wrapper-based and self-training methods iteratively label and retrain on new data</li>
+            <li>Topic-based SSL (Semi-Supervised Learning) clusters tweets by topic for specialised sentiment models</li>
+        </ul>
 
-    <h2>Summary</h2>
-    <ul>
-      <li>Information extraction structures unstructured text for further analysis</li>
-      <li>NER identifies and classifies entities in text</li>
-      <li>POS tagging assigns grammatical roles to words</li>
-      <li>Sentiment analysis classifies opinions and attitudes in text</li>
-      <li>Multiple approaches exist for sentiment analysis, including machine learning and lexicon-based methods</li>
-      <li>Evaluation relies on precision, recall, and F1-score</li>
-    </ul>
-    <div class="img-placeholder">[Image Placeholder: Summary Graphic]</div>
-</div>
-{% include 'footer.html' %}
+        <h2>Evaluating Text Classifiers</h2>
+        <ul>
+            <li><strong>Accuracy:</strong> Percentage of correct predictions (not reliable with unbalanced classes)</li>
+            <li><strong>Precision:</strong> Proportion of predicted positives that are true positives</li>
+            <li><strong>Recall:</strong> Proportion of actual positives correctly identified</li>
+            <li><strong>F1-score:</strong> Harmonic mean of precision and recall</li>
+        </ul>
+        <p>
+            Precision and recall are preferred over accuracy when dealing with rare or unbalanced classes.
+        </p>
+        <div class="img-placeholder">[Image Placeholder: Precision, Recall, F1-score Diagram]</div>
 
+        <h2>Summary</h2>
+        <ul>
+            <li>Information extraction structures unstructured text for further analysis</li>
+            <li>NER identifies and classifies entities in text</li>
+            <li>POS tagging assigns grammatical roles to words</li>
+            <li>Sentiment analysis classifies opinions and attitudes in text</li>
+            <li>Multiple approaches exist for sentiment analysis, including machine learning and lexicon-based methods</li>
+            <li>Evaluation relies on precision, recall, and F1-score</li>
+        </ul>
+        <div class="img-placeholder">
+
+        </div>
+    </div>
+    {% include 'footer.html' %}
 </body>
 </html>
